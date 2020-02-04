@@ -25,7 +25,7 @@ public class GraphicsRenderer {
                 * Math.sqrt((focalX - cameraX) 
                         * (focalX - cameraX) 
                         + (focalZ - cameraZ) 
-                        * (focalZ - cameraZ));
+                        * (focalZ - cameraZ)) + 300;
         
     }
     
@@ -36,7 +36,7 @@ public class GraphicsRenderer {
                 * Math.sqrt((focalY - cameraY) 
                         * (focalY - cameraY) 
                         + (focalZ - cameraZ) 
-                        * (focalZ - cameraZ));
+                        * (focalZ - cameraZ)) + 300;
         
     }
     

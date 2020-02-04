@@ -20,30 +20,29 @@ import rendering.Point3D;
  */
 public class FabrikGUI {
     public static void main(String[] args) {
-       JFrame frame = new JFrame("My First GUI");
+       JFrame frame = new JFrame("Fabrik");
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.setSize(1000,800);
+       frame.setSize(1000,1000);
        frame.setVisible(true);
        JPanel panel = new JPanel();
-       panel.setSize(800, 600);
+       panel.setSize(600, 600);
        panel.setAlignmentY(40);
        frame.add(panel);
-       panel.setBounds(10, 200, 800, 600);
+       panel.setBounds(100, 200, 800, 600);
        panel.setBackground(Color.WHITE);
        Graphics g = panel.getGraphics();
        Camera c = new Camera();
-       c.setCameraPoint(new Point3D(100, 150, 100));
-       c.setFocalPoint(new Point3D(100, 150, 50));
+       c.setScreenHeight(600);
+       c.setScreenWidth(600);
+       c.setCameraPoint(new Point3D(50, -150, 200));
+       c.setFocalPoint(new Point3D(80, -80, 190));
        c.setGraphics(g);
-       BeadGrid grid = new BeadGrid(new Point3D(50, 0, 10), new Point3D(1000, 20, 1000), new Point3D(0, 20, 1000), 10, 10);
+       BeadGrid grid = new BeadGrid(new Point3D(200, 200, 200), new Point3D(500, 200, 500), new Point3D(500, 500, 500), 10, 10);
        grid.draw(c);
        
-        JSlider xSlider = new JSlider(-200, 1000);
-        xSlider.setAlignmentY(10);
-        JSlider ySlider = new JSlider(-200, 1000);
-        ySlider.setAlignmentY(20);
-        JSlider zSlider = new JSlider(-200, 1000);
-        zSlider.setAlignmentY(30);
+        JSlider xSlider = new JSlider(-1000, 1000);
+        JSlider ySlider = new JSlider(-1000, 1000);
+        JSlider zSlider = new JSlider(-1000, 1000);
         
         
         ChangeListener cameraXChangeListener = new ChangeListener() {
@@ -76,6 +75,7 @@ public class FabrikGUI {
         
         frame.getContentPane().add(xSlider);
         xSlider.setBounds(10, 10, 500, 10);
+        xSlider.setValue(200);
         frame.getContentPane().add(ySlider);
         ySlider.setBounds(10, 20, 500, 20);
         frame.getContentPane().add(zSlider);

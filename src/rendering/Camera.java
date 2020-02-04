@@ -13,16 +13,27 @@ public class Camera {
     private Point3D cameraPoint;
     private Point3D focalPoint;
     private Graphics graphics;
+    private int screenHeight;
+    private int screenWidth;
+    private double screenAngle;
+    
+    private static final double DEFAULT_SCREEN_ANGLE = Math.PI / 5.0;
     
     
-    public Camera(double x, double y, double z, double focalX, double focalY, double focalZ) {
+    public Camera(double x, double y, double z, double focalX, double focalY, double focalZ, int screenHeight, int screenWidth) {
         this.cameraPoint = new Point3D(x, y, z);
         this.focalPoint = new Point3D(focalX, focalY, focalZ);
+        this.screenHeight = screenHeight;
+        this.screenWidth = screenWidth;
+        this.screenAngle = DEFAULT_SCREEN_ANGLE;
     }
     
-    public Camera(Point3D cameraPoint, Point3D focalPoint) {
+    public Camera(Point3D cameraPoint, Point3D focalPoint, int screenHeight, int screenWidth) {
         this.cameraPoint = cameraPoint;
         this.focalPoint = focalPoint;
+        this.screenHeight = screenHeight;
+        this.screenWidth = screenWidth;
+        this.screenAngle = DEFAULT_SCREEN_ANGLE;
     }
     
     public Camera() {
@@ -34,15 +45,21 @@ public class Camera {
         return GraphicsRenderer.getDisplayLocation(point, getCameraPoint(), getFocalPoint());
     }
     
+//    public Point2D getDisplayPoint(Point3D point) {
+//        return new Point2D(
+//            (Math.atan((point.getZ() - getCameraPoint().getZ()) / (point.getX() - getCameraPoint().getX())) / DEFAULT_SCREEN_ANGLE)* this.screenWidth - (this.screenWidth / 2.0),
+//            (Math.atan((point.getZ() - getCameraPoint().getZ()) / (point.getY() - getCameraPoint().getY())) / DEFAULT_SCREEN_ANGLE) * this.screenHeight - (this.screenHeight / 2.0));
+//    }
+    
     public void setCameraPointAndShiftFocal(Point3D point) {
-        double shiftX = point.getX() - cameraPoint.getX();
-        double shiftY = point.getY() - cameraPoint.getY();
-        double shiftZ = point.getZ() - cameraPoint.getZ();
-        this.cameraPoint = point;
-        double focalX = focalPoint.getX() + shiftX;
-        double focalY = focalPoint.getY() + shiftY;
-        double focalZ = focalPoint.getZ() + shiftZ;
-        this.focalPoint = new Point3D(focalX, focalY, focalZ);
+        double shiftX = point.getX() - getCameraPoint().getX();
+        double shiftY = point.getY() - getCameraPoint().getY();
+        double shiftZ = point.getZ() - getCameraPoint().getZ();
+        this.setCameraPoint(point);
+        double focalX = getFocalPoint().getX() + shiftX;
+        double focalY = getFocalPoint().getY() + shiftY;
+        double focalZ = getFocalPoint().getZ() + shiftZ;
+        this.setFocalPoint(new Point3D(focalX, focalY, focalZ));
     }
     
 //    public void setCameraFocalPointByAngleAndDistance(double angleX, double angleY, double distanceToFocalPoint) {
@@ -87,6 +104,30 @@ public class Camera {
 
     public void setFocalPoint(Point3D focalPoint) {
         this.focalPoint = focalPoint;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public void setScreenHeight(int screenHeight) {
+        this.screenHeight = screenHeight;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public void setScreenWidth(int screenWidth) {
+        this.screenWidth = screenWidth;
+    }
+
+    public double getScreenAngle() {
+        return screenAngle;
+    }
+
+    public void setScreenAngle(double screenAngle) {
+        this.screenAngle = screenAngle;
     }
     
     
