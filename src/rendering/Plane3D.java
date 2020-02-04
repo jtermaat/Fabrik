@@ -44,7 +44,7 @@ public class Plane3D {
     }
     
     public Point3D intersectsWith(Line3D line) {
-        double x = line.getPoint2().getX() - line.getPoint1().getX();
+        double x = line.getVector().getX() - line.getPoint().getX();
         return null;
     }
 

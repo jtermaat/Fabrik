@@ -17,6 +17,10 @@ public class Point3D {
         this.y = y;
         this.z = z;
     }
+    
+    public static Vector3D getVector3DFromPoints(Point3D p1, Point3D p2) {
+        return new Vector3D(p2.getX() - p1.getX(), p2.getY() - p1.getY(), p2.getZ() - p1.getZ());
+    }
 
     public double getX() {
         return x;

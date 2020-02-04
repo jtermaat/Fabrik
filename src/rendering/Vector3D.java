@@ -26,14 +26,19 @@ public class Vector3D {
         double x1;
         double y1;
         double z1;
-        x1 = y * other.getZ() - z * other.getY();
-        y1 = z * other.getX() - x * other.getZ();
-        z1 = x * other.getY() - y * other.getX();
+        x1 = z * other.getY() - y * other.getZ();
+        y1 = x * other.getZ() - z * other.getX();
+        z1 = y * other.getX() - x * other.getY();
         return new Vector3D(x1, y1, z1);
     }
     
     public double getMagnitude() {
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+    }
+    
+    @Override
+    public String toString() {
+        return "{" + x + ";" + y + ";" + z + "}";
     }
 
     public double getX() {

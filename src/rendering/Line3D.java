@@ -8,51 +8,55 @@ package rendering;
  * @author John
  */
 public class Line3D {
-    private Point3D point1;
-    private Point3D point2;
+    private Point3D point;
+    private Vector3D vector;
     
-    public static void main(String[] args) {
-        Point3D p1 = new Point3D(3, 1, -1);
-        Point3D p2 = new Point3D(5, 2, 1);
-        Line3D line = new Line3D();
-        line.setPoint1(p1);
-        line.setPoint2(p2);
-        Point3D p0 = new Point3D(0,2,3);
-        System.out.println("distance: " + line.getDistanceFromPoint(p0)); // expect 5;
+    public Line3D(Point3D p1, Point3D p2) {
+        this(p1, Point3D.getVector3DFromPoints(p2, p1));
     }
     
-//    private double getDistanceFromPoint(Point3D point0) {
-//        return Math.sqrt(
-//                ((point1.getX() - point0.getX()) + (point2.getX() - point1.getX())*Math.pow(((point0.getY() - point1.getY())/(point2.getY() - point1.getY())), 2)) 
-//                +((point1.getY() - point0.getY()) + (point2.getY() - point1.getY())*Math.pow(((point0.getX() - point1.getX())/(point2.getX() - point1.getX())), 2))
-//                +((point1.getZ() - point0.getZ()) + (point2.getZ() - point1.getZ())*Math.pow(((point0.getX() - point1.getX())/(point2.getX() - point1.getX())), 2)));
-//    }
+    public Line3D(Point3D point, Vector3D vector) {
+        this.point = point;
+        this.vector = vector;
+    }
+    
+    public static void main(String[] args) {
+        Vector3D v = new Vector3D(2, 1, 2);
+        Point3D p = new Point3D(3, 1, -1);
+        Line3D line = new Line3D(p,v);
+        Point3D p0 = new Point3D(0,2,3);
+        System.out.println("distance: " + line.getDistanceFromPoint(p0)); // expect 5;
+        
+        Point3D p1 = new Point3D(5,2,1);
+        Point3D p2 = new Point3D(3,1,-1);
+        Point3D p3 = new Point3D(0,2,3);
+        Line3D line2 = new Line3D(p1, p2);
+        System.out.println("distance2: " + line2.getDistanceFromPoint(p3));
+    }
     
     private double getDistanceFromPoint(Point3D point0) {
         Vector3D lineVector = getVector();
-        Vector3D pointVector = new Vector3D(point0.getX() - point1.getX(), point0.getY() - point1.getY(), point0.getZ() - point1.getX());
+        Vector3D pointVector = Point3D.getVector3DFromPoints(point, point0);
         Vector3D productVector = lineVector.crossProduct(pointVector);
-        return productVector.getMagnitude() / pointVector.getMagnitude(); 
+        System.out.println("line vector; " + lineVector);
+        System.out.println("point vector: " + pointVector);
+        System.out.println("product vector: " + productVector);
+        return productVector.getMagnitude() / lineVector.getMagnitude(); 
     }
-    
+
+    public Point3D getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point3D point) {
+        this.point = point;
+    }
+
     public Vector3D getVector() {
-        return new Vector3D(point2.getX() - point1.getX(), point2.getY() - point1.getY(), point2.getZ() - point1.getZ());
-        
+        return vector;
     }
 
-    public Point3D getPoint1() {
-        return point1;
-    }
-
-    public void setPoint1(Point3D point1) {
-        this.point1 = point1;
-    }
-
-    public Point3D getPoint2() {
-        return point2;
-    }
-
-    public void setPoint2(Point3D point2) {
-        this.point2 = point2;
+    public void setVector(Vector3D vector) {
+        this.vector = vector;
     }
 }
