@@ -43,6 +43,10 @@ public class Line3D {
         System.out.println("product vector: " + productVector);
         return productVector.getMagnitude() / lineVector.getMagnitude(); 
     }
+    
+    public Point3D getAuxPoint() {
+        return new Point3D(point.getX() + vector.getX(), point.getY() + vector.getY(), point.getZ() + vector.getZ());
+    }
 
     public Point3D getPoint() {
         return point;

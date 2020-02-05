@@ -32,6 +32,10 @@ public class Vector3D {
         return new Vector3D(x1, y1, z1);
     }
     
+    public Point3D toPoint() {
+        return new Point3D(x, y, z);
+    }
+    
     public double getMagnitude() {
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
     }

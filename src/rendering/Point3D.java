@@ -21,6 +21,10 @@ public class Point3D {
     public static Vector3D getVector3DFromPoints(Point3D p1, Point3D p2) {
         return new Vector3D(p2.getX() - p1.getX(), p2.getY() - p1.getY(), p2.getZ() - p1.getZ());
     }
+    
+    public Point3D addVector(Vector3D v) {
+        return new Point3D(x + v.getX(), y + v.getY(), z + v.getZ());
+    }
 
     public double getX() {
         return x;
