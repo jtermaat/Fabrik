@@ -5,8 +5,8 @@ package fabrik.physics;
 
 import java.util.HashSet;
 import java.util.Set;
-import rendering.Camera;
 import rendering.Point3D;
+import rendering.Screen;
 
 /**
  *
@@ -48,9 +48,9 @@ public class BeadGrid {
         }
     }
     
-    public void draw(Camera c) {
+    public void draw(Screen s) {
         for (Bead bead : beads) {
-            bead.draw(c);
+            bead.draw(s);
         }
     }
 }

@@ -5,9 +5,9 @@ package fabrik.physics;
 
 import java.util.HashSet;
 import java.util.Set;
-import rendering.Camera;
 import rendering.Point2D;
 import rendering.Point3D;
+import rendering.Screen;
 
 /**
  *
@@ -55,13 +55,12 @@ public class Bead {
         influences.add(other);
     }
     
-    public void draw(Camera c) {
-        Point2D drawPoint = c.getDisplayPoint(new Point3D(x, y, z));
-        System.out.println("drawPoint: " + drawPoint);
-        c.getGraphics().drawOval((int)(drawPoint.getX()-2.0), (int)(drawPoint.getY()-2.0), 4, 4);
+    public void draw(Screen s) {
+        Point2D drawPoint = s.getRenderedPoint(new Point3D(x, y, z));
+        s.getGraphics().drawOval((int)(drawPoint.getX()-2.0), (int)(drawPoint.getY()-2.0), 4, 4);
         for (Bead other : influences) {
-            Point2D otherDrawPoint = c.getDisplayPoint(other.getPoint3D());
-            c.getGraphics().drawLine((int)drawPoint.getX(), (int)drawPoint.getY(), (int)otherDrawPoint.getX(), (int)otherDrawPoint.getY());
+            Point2D otherDrawPoint = s.getRenderedPoint(other.getPoint3D());
+            s.getGraphics().drawLine((int)drawPoint.getX(), (int)drawPoint.getY(), (int)otherDrawPoint.getX(), (int)otherDrawPoint.getY());
         }
     }
     

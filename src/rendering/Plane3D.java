@@ -13,10 +13,6 @@ public class Plane3D {
     private double c;
     private double d;
     
-    public Plane3D(Line3D perpendicular, Point3D pointOnPlane) {
-        
-    }
-    
     /**
      * Creates a plane from three distinct points on that plane.
      * 
@@ -30,8 +26,6 @@ public class Plane3D {
         this.c = ((point2.getX() - point1.getX()) * (point3.getY() - point1.getY())) - ((point3.getZ() - point1.getX()) * (point2.getY() - point1.getY()));
         this.d = -1.0 * (this.a * point1.getX() + this.b * point1.getY() + this.c * point1.getZ());
     }
-    
-    
     
     /**
      * Creates a plane that is equidistant between the two given points.
@@ -60,7 +54,8 @@ public class Plane3D {
         double outputZ = (z2 - z1) * (outputX - x1) / (x2 - x1) + z1;
         return new Point3D(outputX, outputY, outputZ);
     }
-
     
-    
+    public Vector3D getDefaultVector() {
+        return new Vector3D(1.0, 1.0, (-1.0 * a - -1.0 * b)/c);
+    }
 }

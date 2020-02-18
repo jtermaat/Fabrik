@@ -22,6 +22,11 @@ public class Point3D {
         return new Vector3D(p2.getX() - p1.getX(), p2.getY() - p1.getY(), p2.getZ() - p1.getZ());
     }
     
+    public Point3D moveDistanceInDirection(double distance, Vector3D direction) {
+        double ratio = distance / direction.getMagnitude();
+        return new Point3D(x + direction.getX() * ratio, y + direction.getY() * ratio, z + direction.getZ() * ratio);
+    }
+    
     public Point3D addVector(Vector3D v) {
         return new Point3D(x + v.getX(), y + v.getY(), z + v.getZ());
     }
