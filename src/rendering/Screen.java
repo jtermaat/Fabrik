@@ -65,13 +65,30 @@ public class Screen {
         graphics.drawLine((int)lineStart2D.getX(), (int)lineStart2D.getY(), (int)lineEnd2D.getX(), (int)lineEnd2D.getY());
     }
     
+    public Line3D get3DLineFrom2DPoint(Point2D point) {
+        Point3D point3d = get3DPointFrom2DPoint(point);
+        return new Line3D(point3d, this.cameraPoint);
+    }
+    
+    public Point3D get3DPointFrom2DPoint(Point2D point) {
+        return origin.moveDistanceInDirection(point.getX(), xAxisVector).moveDistanceInDirection(point.getY(), yAxisVector);
+    }
+    
     public Point2D getPointFromLineIntersection(Line3D line) {
         Line3D xAxis = new Line3D(origin, xAxisVector);
         Line3D yAxis = new Line3D(origin, yAxisVector);
         Point3D intersection = plane.intersectsWith(line);
+        if (pointIsOnScreen(intersection)) {
         double x = yAxis.getDistanceFromPoint(intersection);
         double y = xAxis.getDistanceFromPoint(intersection);
         return new Point2D(x, y);
+        } else {
+            return null;
+        }
+    }
+    
+    private boolean pointIsOnScreen(Point3D point) {
+        return true;
     }
     
     public Point2D getRenderedPoint(Point3D point) {

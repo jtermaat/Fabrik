@@ -5,6 +5,7 @@ package fabrik.physics;
 
 import java.util.HashSet;
 import java.util.Set;
+import rendering.Line3D;
 import rendering.Point3D;
 import rendering.Screen;
 
@@ -14,6 +15,8 @@ import rendering.Screen;
  */
 public class BeadGrid {
     Set<Bead> beads;
+    
+    final static double SELECTION_THRESHHOLD = 5.0;
     
     public BeadGrid(Point3D corner1, Point3D corner2, Point3D corner3, int numBeadsWidth, int numBeadsLength) {
         beads = new HashSet<Bead>();
@@ -40,6 +43,15 @@ public class BeadGrid {
                 }
             }
         }
+    }
+    
+    public Bead getSelectedBead(Line3D selectionLine) {
+        for (Bead bead : beads) {
+            if (selectionLine.getDistanceFromPoint(bead.getPoint3D()) < SELECTION_THRESHHOLD) {
+                return bead;
+            }
+        }
+        return null;
     }
     
     public void nextFrame() {
